@@ -14,9 +14,7 @@ Debian based systems
 RHEL based systems
 ~~~~~~~~~~~~~~~~~~
 
-Install Python2.7 with PUIAS::
-
-    https://gist.github.com/nico4/9616638
+Install Python2.7 with PUIAS: https://gist.github.com/nico4/9616638
 
 Run these commands::
 
