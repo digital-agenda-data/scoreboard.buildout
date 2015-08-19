@@ -70,14 +70,10 @@ Run buildout::
 
 Download and unzip data files::
 
-    cd var/filestorage/
-    wget http://scoreboardtest.edw.ro/download/Data.fs.gz
-    wget http://scoreboardtest.edw.ro/download/filestorage.tar.gz
-    wget http://scoreboardtest.edw.ro/download/blobstorage.tar.gz
-
-    gunzip Data.fs.gz
-    tar xf filestorage.tar.gz
-    tar xf blobstorage.tar.gz
+    cd var
+    wget http://test.digital-agenda-data.eu/download/datafs.test.tar.gz
+    gunzip datafs.test.tar.gz
+    tar xf datafs.test.tar
 
 Start application::
     
