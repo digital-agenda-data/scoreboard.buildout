@@ -75,16 +75,17 @@ for row in reader:
             timestamp.write(row[1])
         # export TTL using isql command
         with open('isql.script', 'w') as f:
-            f.write("dump_one_graph('{0}', '{1}/{2}');".format(row[2], OUTPUT_DIR, dataset))
+            f.write("dump_one_graph('{0}', '{1}/{2}', 5000000000);".format(row[2], OUTPUT_DIR, dataset))
 
         print 'Exporting ttl for %s' % dataset
-        call(["isql", ISQL_PORT, ISQL_USER, ISQL_PASSWORD, "isql.script"])
-        print 'Zipping %s.ttl' % dataset
-        zf = zipfile.ZipFile(OUTPUT_DIR +'/' + "%s.ttl.zip" % (dataset), "w", zipfile.ZIP_DEFLATED)
-        files = glob.glob(OUTPUT_DIR +'/' + dataset + '*.ttl')
-        for filename in files:
-            zf.write(filename, os.path.split(filename)[-1])
-        zf.close()
+        call(["/var/local/virtuoso/bin/isql", ISQL_PORT, ISQL_USER, ISQL_PASSWORD, "isql.script"])
+        #call(["isql", ISQL_PORT, ISQL_USER, ISQL_PASSWORD, "isql.script"])
+        #print 'Zipping %s.ttl' % dataset
+        #zf = zipfile.ZipFile(OUTPUT_DIR +'/' + "%s.ttl.zip" % (dataset), "w", zipfile.ZIP_DEFLATED)
+        #files = glob.glob(OUTPUT_DIR +'/' + dataset + '*.ttl')
+        #for filename in files:
+        #    zf.write(filename, os.path.split(filename)[-1])
+        #zf.close()
         # export CSV
         sparql_csv_params = urllib.urlencode({
             'default-graph-uri': '',
