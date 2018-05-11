@@ -13,8 +13,6 @@ include/
 lib/
 local/
 parts/
-src
-src/
 var/
 Scripts/
 build/
