@@ -3,6 +3,12 @@ scoreboard.buildout
 ===================
 Scoreboard installation kit based on zc.buildout_
 
+
+Updated install
+---------------
+
+
+
 Prerequisites - System packages
 -------------------------------
 
@@ -21,33 +27,34 @@ Run these commands::
     curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python2.7 -
 
     pip2.7 install virtualenv
-    pip2.7 install setuptools==2.1
+    pip2.7 install setuptools
 
     yum install git libffi-devel libxslt-devel
 
 
 Product directory
 -----------------
-                                                                                
-Create the product directory::                                                  
-                                                                                
-    mkdir -p /var/local/scoreboard
-                                                                                
-Create a new user::                                                             
-                                                                                
-    adduser edw                                                                 
-                                                                                
-Change the product directory's owner::                                          
-                                                                                
-    chown edw:edw /var/local/scoreboard -R    
 
-Development setup
------------------
+Create the product directory::
+
+    mkdir -p /var/local/scoreboard
+
+Create a new user::
+
+    adduser edw
+
+Change the product directory's owner::
+
+    chown edw:edw /var/local/scoreboard -R
+
+Setup
+-----
 
 Run the following commands as an unpriviledged user in the product directory::
 
     su edw
     cd /var/local/scoreboard
+
 
 Clone the repository::
 
@@ -61,12 +68,35 @@ Switch to the development branch::
 Create and activate the virtual environment::
 
     virtualenv-2.7 .
-    source bin/activate
+    ./bin/pip install -U pip
+    ./bin/pip install -r requirements.txt
+
+
+Production
+----------
 
 Run buildout::
 
-    python bootstrap.py -c devel.cfg
-    bin/buildout -c devel.cfg
+    ln -s production.cfg buildout.cfg
+    ./bin/buildout
+
+Start application::
+
+    bin/supervisord
+
+
+Post-install management::
+
+    ./bin/supervisorctl status
+
+
+Development
+-----------
+
+Run buildout::
+
+    ln -s devel.cfg buildout.cfg
+    ./bin/buildout
 
 Download and unzip data files::
 
@@ -76,7 +106,7 @@ Download and unzip data files::
     tar xf datafs.test.tar
 
 Start application::
-    
+
     cd ../..
     bin/instance fg
 

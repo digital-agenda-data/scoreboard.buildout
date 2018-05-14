@@ -1,0 +1,4 @@
+-c constraints.txt
+
+zc.buildout
+setuptools
